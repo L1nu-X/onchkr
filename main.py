@@ -5,9 +5,8 @@ Then returns a list with the pages that are online.
 """
 
 #import socks
-#import os
+import os
 from sys import argv, exit
-import subprocess
 import requests
 from classes.bcolors import bcolors
 from classes.checkIP import checkIPs
@@ -28,4 +27,12 @@ except:
     exit(1)
 
 
+current_path = os.getcwd()
+file_path = current_path + "/" + filename
 
+onion_link_file = open(file_path, 'r+')
+
+for line in onion_link_file:
+    print(line)
+
+onion_link_file.close()
