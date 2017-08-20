@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+This script will check a list of onion links if they are online or not.
+Then returns a list with the pages that are online. 
+"""
 
 #import socks
 #import os
@@ -8,10 +12,6 @@ import requests
 from classes.bcolors import bcolors
 from classes.checkIP import checkIPs
 
-"""
-This script will check a list of onion links if they are online or not.
-Then the user will be able to open the link in his Tor browser by clicking on the "Visit" icon.
-"""
 
 print(bcolors.FAIL + "="*50 + bcolors.ENDC)
 print(bcolors.OKGREEN + "Onion Link validator " + bcolors.ENDC)

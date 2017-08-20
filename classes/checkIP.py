@@ -1,3 +1,9 @@
+"""
+This module defines a function which prints the Public IP Address and the 
+Tor IP Address. 
+The module is very basic and needs further changes. 
+"""
+
 import requests
 import json
 from classes.bcolors import bcolors
