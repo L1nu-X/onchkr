@@ -9,7 +9,7 @@ import os
 from sys import argv, exit
 import requests
 from classes.bcolors import bcolors
-from classes.checkIP import checkIPs
+from classes.checkCl import checkIPs, checkLink
 
 
 print(bcolors.FAIL + "="*50 + bcolors.ENDC)
@@ -18,8 +18,7 @@ print(bcolors.FAIL + "="*50 + bcolors.ENDC)
 
 
 checkIPs()
-
-
+checkLink('https://www.google.com')
 try:
     filename = argv[1]
 except:
