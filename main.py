@@ -29,9 +29,13 @@ except:
 current_path = os.getcwd()
 file_path = current_path + "/" + filename
 
-onion_link_file = open(file_path, 'r+')
 
-for line in onion_link_file:
-    checkLink(line.strip())
+with open(file_path) as f:
+    content = f.readlines()
 
-onion_link_file.close()
+content = [x.strip() for x in content]
+
+
+for line in content:
+    checkLink(line)
+

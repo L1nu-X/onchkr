@@ -31,14 +31,15 @@ def checkLink(link):
     websiteObj = requests.get(link, proxies=PROXY)
     try:
         response_code = websiteObj.status_code
-    except ConnectionError:
-        response_code = False
+    except requests.ConnectionError:
+        pass
 
-    if response_code == 200:
+    if response_code >= 200 and response_code <= 299:
         status = 'OK'
-    else:
+        print("Link: ", link, "\nStatus:", bcolors.OKGREEN + status + bcolors.ENDC )
+    elif response_code >= 500:
         status = 'Failed'
+        print("Link: ", link, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
 
-    print("Link: ", link, "\nStatus:", bcolors.OKGREEN + status + bcolors.ENDC )
 
 
