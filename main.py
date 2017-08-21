@@ -18,7 +18,7 @@ print(bcolors.FAIL + "="*50 + bcolors.ENDC)
 
 
 checkIPs()
-checkLink('https://www.google.com')
+
 try:
     filename = argv[1]
 except:
@@ -32,6 +32,6 @@ file_path = current_path + "/" + filename
 onion_link_file = open(file_path, 'r+')
 
 for line in onion_link_file:
-    print(line)
+    checkLink(line.strip())
 
 onion_link_file.close()

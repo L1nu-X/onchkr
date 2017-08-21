@@ -29,7 +29,11 @@ def checkIPs():
 
 def checkLink(link):
     websiteObj = requests.get(link, proxies=PROXY)
-    response_code = websiteObj.status_code
+    try:
+        response_code = websiteObj.status_code
+    except ConnectionError:
+        response_code = False
+
     if response_code == 200:
         status = 'OK'
     else:
