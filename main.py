@@ -1,4 +1,4 @@
-#!/home/sokratisk/Projects/Python/onchkrEnv/bin/python3
+#!/usr/bin/python3
 """
 This script will check a list of onion links if they are online or not.
 Then returns a list with the pages that are online. 
