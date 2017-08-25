@@ -36,5 +36,4 @@ content = [x.strip() for x in content]
 
 
 for line in content:
-    checkLink2(line)
-
+    checkLink(line)

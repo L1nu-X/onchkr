@@ -13,7 +13,8 @@ def checkIPs():
     This funciton checks first the Public IP and then the TOR IP and prints them out.
     """
     proxy = SOCKSProxyManager('socks5://localhost:9050/')
-    myip = proxy.request('GET', 'http://httpbin.org/ip')
+    http = urllib3.PoolManager()
+    myip = http.request('GET', 'http://httpbin.org/ip')
 
     try:
         torIP = proxy.request('GET', 'http://httpbin.org/ip')
@@ -21,8 +22,8 @@ def checkIPs():
         print(bcolors.FAIL + "proxy isn't running or address:port is wrong.\nScript will exit." + bcolors.ENDC)
         exit(1)
 
-    print(myip.data)
-    print(str(myip.data))
+    #print(myip.data)
+    #print(str(myip.data))
     jsonIP =json.loads(myip.data.decode('utf-8'))
     jsonTorIP = json.loads(torIP.data.decode('utf-8'))
 
