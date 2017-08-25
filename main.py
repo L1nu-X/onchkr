@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/sokratisk/Projects/Python/onchkrEnv/bin/python3
 """
 This script will check a list of onion links if they are online or not.
 Then returns a list with the pages that are online. 
@@ -7,7 +7,6 @@ Then returns a list with the pages that are online.
 #import socks
 import os
 from sys import argv, exit
-import requests
 from classes.bcolors import bcolors
 from classes.checkCl import checkIPs, checkLink
 
