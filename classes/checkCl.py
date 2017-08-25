@@ -47,4 +47,21 @@ def checkLink(link):
         print("Link: ", link, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
 
 
+#test function work.
+
+def checkLink2(link):
+    try:
+        http = urllib3.PoolManager()
+        websiteObj = http.request('GET', link)
+        response_code = websiteObj.status
+    except:
+        response_code = 500
+        pass
+
+    if response_code >= 200 and response_code <= 299:
+        status = 'OK'
+        print("Link: ", link, "\nStatus:", bcolors.OKGREEN + status + bcolors.ENDC )
+    elif response_code >= 500:
+        status = 'Failed'
+        print("Link: ", link, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
 

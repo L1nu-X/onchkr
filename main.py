@@ -8,7 +8,7 @@ Then returns a list with the pages that are online.
 import os
 from sys import argv, exit
 from classes.bcolors import bcolors
-from classes.checkCl import checkIPs, checkLink
+from classes.checkCl import checkIPs, checkLink, checkLink2
 
 
 print(bcolors.FAIL + "="*50 + bcolors.ENDC)
@@ -36,5 +36,5 @@ content = [x.strip() for x in content]
 
 
 for line in content:
-    checkLink(line)
+    checkLink2(line)
 
