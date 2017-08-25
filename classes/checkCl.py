@@ -1,3 +1,4 @@
+import certifi
 import urllib3
 from urllib3.contrib.socks import SOCKSProxyManager
 import json
@@ -33,8 +34,8 @@ def checkIPs():
 
 def checkLink(link):
     try:
-        proxy = SOCKSProxyManager('socks5://localhost:9050/')
-        websiteObj = proxy.request('GET', link)
+        proxy = SOCKSProxyManager('socks5://localhost:9050/', cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+        websiteObj = proxy.request('GET', link, timeout=0.5)
         response_code = websiteObj.status
     except:
         response_code = 500
