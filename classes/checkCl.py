@@ -1,3 +1,4 @@
+import re
 import certifi
 import urllib3
 from urllib3.contrib.socks import SOCKSProxyManager
@@ -13,7 +14,7 @@ def checkIPs():
     """
     This funciton checks first the Public IP and then the TOR IP and prints them out.
     """
-    proxy = SOCKSProxyManager('socks5://localhost:9050/')
+    proxy = SOCKSProxyManager('socks5h://localhost:9050/')
     http = urllib3.PoolManager()
     myip = http.request('GET', 'http://httpbin.org/ip')
 
@@ -34,8 +35,8 @@ def checkIPs():
 
 def checkLink(link):
     try:
-        proxy = SOCKSProxyManager('socks5://localhost:9050/', cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
-        websiteObj = proxy.request('GET', link, timeout=0.5)
+        proxy = SOCKSProxyManager('socks5h://localhost:9050/') #, cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+        websiteObj = proxy.request('GET', link, timeout=3.0)
         response_code = websiteObj.status
     except:
         response_code = 500
@@ -43,12 +44,24 @@ def checkLink(link):
 
     if response_code >= 200 and response_code <= 299:
         status = 'OK'
-        print("Link: ", link, "\nStatus:", bcolors.OKGREEN + status + bcolors.ENDC )
+        print("Link: ", bcolors.OKBLUE +  link + bcolors.ENDC , "\nStatus:", bcolors.OKGREEN + status + bcolors.ENDC )
     elif response_code >= 500:
         status = 'Failed'
-        print("Link: ", link, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
+        print("Link: ", bcolors.FAIL + link + bcolors.ENDC, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
 
 
+def extrOnionLink(link):
+    pattern = re.compile(r'(.+.onion)')
+    matchObj = re.search(pattern, str(link))
+    link = matchObj.group(1)
+#    link = "http://"+link.strip()
+    return link
+
+
+
+
+
+"""
 #test function work.
 
 def checkLink2(link):
@@ -66,4 +79,4 @@ def checkLink2(link):
     elif response_code >= 500:
         status = 'Failed'
         print("Link: ", link, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
-
+"""
