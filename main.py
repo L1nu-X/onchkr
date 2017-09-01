@@ -4,17 +4,20 @@ This script will check a list of onion links if they are online or not.
 Then returns a list with the pages that are online. 
 """
 
-#import socks
+import subprocess
 import os
 from sys import argv, exit
 from classes.bcolors import bcolors
-from classes.checkCl import checkIPs, checkLink, checkLink2
+from classes.checkCl import checkIPs, checkLink, extrOnionLink
 
 
-print(bcolors.FAIL + "="*50 + bcolors.ENDC)
-print(bcolors.OKGREEN + "Onion Link validator " + bcolors.ENDC)
-print(bcolors.FAIL + "="*50 + bcolors.ENDC)
+subprocess.call('clear')
 
+linkList = []
+
+print(bcolors.FAIL + "=" * 50 + bcolors.ENDC)
+print(bcolors.OKGREEN + "Onion Link validator" + bcolors.ENDC)
+print(bcolors.FAIL + "=" * 50 + bcolors.ENDC)
 
 checkIPs()
 
@@ -32,9 +35,12 @@ file_path = current_path + "/" + filename
 with open(file_path) as f:
     content = f.readlines()
 
+
 content = [x.strip() for x in content]
 
+for item in content:
+    linkList.append(extrOnionLink(item))
 
-for line in content:
-    checkLink2(line)
-
+for link in linkList:
+    checkLink(link)
+    print( "-" * 50)
