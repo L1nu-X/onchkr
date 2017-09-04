@@ -1,5 +1,4 @@
 import re
-import certifi
 import urllib3
 import json
 from urllib3.contrib.socks import SOCKSProxyManager
@@ -7,14 +6,11 @@ from bs4 import BeautifulSoup
 from classes.bcolors import bcolors
 
 
-
-#PROXY = {"http":"socks5://127.0.0.1:9050"}
-
-
 def checkIPs():
     """
     This funciton checks first the Public IP and then the TOR IP and prints them out.
     """
+
     proxy = SOCKSProxyManager('socks5h://localhost:9050/')
     http = urllib3.PoolManager()
     myip = http.request('GET', 'http://httpbin.org/ip')
@@ -25,8 +21,6 @@ def checkIPs():
         print(bcolors.FAIL + "proxy isn't running or address:port is wrong.\nScript will exit." + bcolors.ENDC)
         exit(1)
 
-    #print(myip.data)
-    #print(str(myip.data))
     jsonIP =json.loads(myip.data.decode('utf-8'))
     jsonTorIP = json.loads(torIP.data.decode('utf-8'))
 
@@ -36,7 +30,7 @@ def checkIPs():
 
 def checkLink(link):
     try:
-        proxy = SOCKSProxyManager('socks5h://localhost:9050/') #, cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+        proxy = SOCKSProxyManager('socks5h://localhost:9050/')
         websiteObj = proxy.request('GET', link, timeout=3.0)
         response_code = websiteObj.status
         sitedata = websiteObj.data
@@ -59,7 +53,6 @@ def extrOnionLink(link):
     pattern = re.compile(r'(.+.onion)')
     matchObj = re.search(pattern, str(link))
     link = matchObj.group(1)
-#    link = "http://"+link.strip()
     return link
 
 
