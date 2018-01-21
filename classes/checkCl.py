@@ -40,13 +40,16 @@ def checkLink(link):
         response_code = 500
         pass
 
-    if response_code >= 200 and response_code <= 299:
+    if response_code >= 200 and response_code < 404:
         status = 'OK'
         print("Title:", bcolors.WARNING + siteTitle + bcolors.ENDC)
         print("Link: ", bcolors.OKBLUE +  link + bcolors.ENDC , "\nStatus:", bcolors.OKGREEN + status + bcolors.ENDC)
-    elif response_code >= 500:
+    elif response_code == 500:
         status = 'Failed'
+        print("Status code:", response_code)
         print("Link: ", bcolors.FAIL + link + bcolors.ENDC, "\nStatus:", bcolors.FAIL + status + bcolors.ENDC )
+    #else:
+     #   print("Response code:", response_code)
 
 
 def extrOnionLink(link):
